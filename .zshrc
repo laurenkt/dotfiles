@@ -33,14 +33,12 @@ zmodload -ap zsh/mapfile mapfile
 setopt ALL_EXPORT
 
 EDITOR="vim"
-PATH=":/usr/local/bin:/usr/local/sbin/:~/bin:~/.gem/ruby/1.8/bin:$PATH"
 TZ="Europe/London"
 HISTFILE=$HOME/.zhistory
 HISTSIZE=1000
 SAVEHIST=1000
 HOSTNAME="`hostname`"
 PAGER='less'
-NODE_PATH='/usr/local/lib/node_modules'
 
 # Colours
 autoload colors zsh/terminfo && colors
@@ -89,45 +87,9 @@ else
 	alias ls='pwd;ls -F1 --color=auto '
 fi 
 
-user_colour=$PX_MAGENTA
-dir_colour=$PX_GREEN
-no_colour=$PX_NO_COLOR
-vimode_colour='[1;30m'
-
 function pwd_with_home() {
 	pwd | sed `printf 's?%q?~?' $HOME` | sed 's/\\/\\\\/g'
 }
-
-# Called before prompt is printed
-# Put our actual prompt here because multi-line prompts seem to malfunction with reset-prompt widget
-function precmd() {
-	print -rn -- $terminfo[el]	# needed to clear vi-mode from previous prompt
-	echo
-	echo "$user_colour$(whoami)$no_colour at $host_colour$(hostname)$no_colour in $dir_colour$(pwd_with_home)$no_colour"
-}
-
-function preexec () {
-	print -rn -- $terminfo[el]	# needed to clear vi-mode while command executes
-}
-
-# Goes down, then up (to insert a bottom-line if at bottom of terminal), saves position, then goes down
-line_under_prompt=$terminfo[cud1]$terminfo[cuu1]$terminfo[sc]$terminfo[cud1]
-function zle-line-init zle-keymap-select {
-	VIMODE="%{$line_under_prompt$vimode_colour${${KEYMAP/vicmd/-- NORMAL --}/(main|viins)/-- INSERT --}$terminfo[rc]$no_colour%}"
-	zle reset-prompt
-}
-
-zle -N zle-line-init
-zle -N zle-keymap-select
-
-# Because part of the prompt is written in precmd, not all in PS1, we need to make the clear key redraw this part too
-function clear-screen-with-prompt {
-	clear
-	precmd
-	zle reset-prompt
-}
-
-zle -N clear-screen-with-prompt
 
 expand-or-complete-with-dots() {
 	echo -n "\e[1;30m...\e[0m" # put the "waiting" dots
@@ -137,7 +99,14 @@ expand-or-complete-with-dots() {
 
 zle -N expand-or-complete-with-dots
 
-export PS1='$VIMODE%# '
+user_colour=$PX_MAGENTA
+dir_colour=$PX_GREEN
+prompt_colour=$PX_CYAN
+no_colour=$PX_NO_COLOR
+
+export PS1="
+$user_colour$(whoami)$no_colour at $host_colour$(hostname)$no_colour in $dir_colour$(pwd_with_home)
+$prompt_colour%# $no_colour"
 
 alias man='LC_ALL=C LANG=C man'
 alias ll='ls -alh'
@@ -149,15 +118,6 @@ bindkey '	' expand-or-complete-with-dots
 bindkey '^L' clear-screen-with-prompt
 bindkey '^R' history-incremental-search-backward
 bindkey ' ' magic-space    # also do history expansion on space
-
-# Removes line, giving prompt for next command, then puts line back afterwards
-bindkey -M vicmd "q" push-line
-bindkey -M vicmd "gg" beginning-of-history
-bindkey -M vicmd "G" end-of-history
-bindkey -M vicmd "k" history-search-backward
-bindkey -M vicmd "j" history-search-forward
-bindkey -M vicmd "?" history-incremental-search-backward
-bindkey -M vicmd "/" history-incremental-search-forward
 
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST

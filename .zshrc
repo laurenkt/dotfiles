@@ -104,9 +104,9 @@ dir_colour=$PX_GREEN
 prompt_colour=$PX_CYAN
 no_colour=$PX_NO_COLOR
 
-export PS1="
+export PROMPT=$'
 $user_colour$(whoami)$no_colour at $host_colour$(hostname)$no_colour in $dir_colour$(pwd_with_home)
-$prompt_colour%# $no_colour"
+$prompt_colour%# $no_colour'
 
 alias man='LC_ALL=C LANG=C man'
 alias ll='ls -alh'

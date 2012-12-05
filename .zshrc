@@ -66,7 +66,7 @@ if [[ `uname` == "Darwin" ]]; then
 	host_colour=$PX_YELLOW
 	
 	# the 'cdf' command will cd to the current open Finder directory, needs OpenTerminal installed
-	alias cdf='eval `osascript /Applications/Utilities/OpenTerminal.app/Contents/Resources/Scripts/OpenTerminal.scpt`'
+	cdf() { cd "`osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)'`" }
 
 	# set macvim as the editor
 	export EDITOR='mvim -f -c "au VimLeave * !open -a Terminal"'

@@ -76,7 +76,8 @@ if [[ `uname` == "Darwin" ]]; then
 	[[ -s "~/.rvm/scripts/rvm" ]] && source "~/.rvm/scripts/rvm"  
 else
 	# Only do this part elsewhere (Linux, assumed)
-	
+	export PATH=$PATH:/usr/lt696/bin:/usr/local/pkg/xilinx-design-suite-14.3-x86_64-1/14.3/ISE_DS/EDK/gnu/microblaze/lin/bin:/usr/local/pkg/marte-1.4/utils:/usr/local/pkg/gnat-3.14p/bin:/32/usr/bin
+
 	# Show running processes on a different tty, that aren't sh or the current shell
 	ps -Nft - -t `tty` -C `basename $SHELL` -C sh 2> /dev/null | grep "^$(whoami)"
 	
@@ -104,9 +105,11 @@ dir_colour=$PX_GREEN
 prompt_colour=$PX_CYAN
 no_colour=$PX_NO_COLOR
 
-export PROMPT=$'
-$user_colour$(whoami)$no_colour at $host_colour$(hostname)$no_colour in $dir_colour$(pwd_with_home)
-$prompt_colour%# $no_colour'
+export PROMPT=$'$user_colour$(whoami)$no_colour at $host_colour$(hostname)$no_colour in $dir_colour$(pwd_with_home) $prompt_colour%# $no_colour'
+
+#export PROMPT=$'
+#$user_colour$(whoami)$no_colour at $host_colour$(hostname)$no_colour in $dir_colour$(pwd_with_home)
+#$prompt_colour%# $no_colour'
 
 alias man='LC_ALL=C LANG=C man'
 alias ll='ls -alh'
@@ -183,5 +186,3 @@ zstyle ':completion:*:ssh:*' tag-order \
 zstyle ':completion:*:ssh:*' group-order \
    hosts-domain hosts-host users hosts-ipaddr
 zstyle '*' single-ignored show
-
-[[ -s "~/.zsh/highlighting.zsh" ]] && source ~/.zsh/highlighting.zsh

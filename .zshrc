@@ -32,9 +32,13 @@ if [[ `uname` == Darwin ]]; then
 
 	# Set ls for colorized; label dirs, exes, etc.; one entry per line
 	alias ls='pwd;ls -F1G '
+<<<<<<< HEAD
 	
 # Only do this part on Linux.
 else
+	# PATH for course tools
+	export PATH=$PATH:/usr/lt696/bin:/usr/local/pkg/xilinx-design-suite-14.3-x86_64-1/14.3/ISE_DS/EDK/gnu/microblaze/lin/bin:/usr/local/pkg/marte-1.4/utils:/usr/local/pkg/gnat-3.14p/bin:/32/usr/bin
+
 	# Show running processes on a different tty, that aren't sh or the current shell
 	ps -Nft - -t `tty` -C `basename $SHELL` -C sh 2> /dev/null | grep "^$USER"
 	
@@ -119,4 +123,6 @@ zstyle ':completion:*:ssh:*' tag-order \
    users 'hosts:-host hosts:-domain:domain hosts:-ipaddr"IP\ Address *'
 zstyle ':completion:*:ssh:*' group-order \
    hosts-domain hosts-host users hosts-ipaddr
+
 zstyle '*' single-ignored show
+

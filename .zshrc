@@ -32,7 +32,6 @@ if [[ `uname` == Darwin ]]; then
 
 	# Set ls for colorized; label dirs, exes, etc.; one entry per line
 	alias ls='pwd;ls -F1G '
-<<<<<<< HEAD
 	
 # Only do this part on Linux.
 else

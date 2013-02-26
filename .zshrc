@@ -47,7 +47,7 @@ else
 fi
 
 # Function that returns `pwd`, but paths relative to home dir are replaced with ~/path
-function pwd_with_home() {
+pwd_with_home() {
 	pwd | sed `printf 's?%q?~?' $HOME` | sed 's/\\/\\\\/g'
 }
 

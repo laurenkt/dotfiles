@@ -1,5 +1,5 @@
 setopt APPEND_HISTORY AUTO_CD AUTO_RESUME AUTO_PUSHD CDABLE_VARS CORRECT CORRECT_ALL EXTENDED_HISTORY EXTENDED_GLOB \
-       HIST_IGNORE_DUPS HIST_REDUCE_BLANKS  INC_APPEND_HISTORY LONG_LIST_JOBS MENU_COMPLETE NOTIFY PROMPT_SUBST \
+       HIST_IGNORE_DUPS HIST_REDUCE_BLANKS INC_APPEND_HISTORY LONG_LIST_JOBS MENU_COMPLETE NOTIFY PROMPT_SUBST \
        PUSHD_SILENT RC_QUOTES REC_EXACT SHARE_HISTORY
 unsetopt AUTO_PARAM_SLASH BEEP BG_NICE CLOBBER
 
@@ -9,20 +9,11 @@ zmodload -a zsh/zpty zpty
 zmodload -a zsh/zprof zprof
 zmodload -ap zsh/mapfile mapfile
 
-setopt ALL_EXPORT
-
-EDITOR="vim"
-TZ="Europe/London"
-HISTFILE=$HOME/.zhistory
-HISTSIZE=1000
-SAVEHIST=1000
-HOSTNAME="`hostname`"
-PAGER='less'
-LC_ALL='en_GB.UTF-8'
-LANG='en_GB.UTF-8'
-LC_CTYPE=C
-
-unsetopt ALL_EXPORT
+export EDITOR="vim"
+export HISTFILE=$HOME/.zhistory
+export HISTSIZE=500
+export SAVEHIST=$HISTSIZE
+export PAGER='less'
 
 # Some parts of this are specific to OS X, or specific to Linux
 if [[ `uname` == "Darwin" ]]; then
@@ -61,7 +52,6 @@ export PROMPT=$'
 %F{magenta}$(whoami)%f at %F{$host_colour}$(hostname)%f in %F{green}$(pwd_with_home)%f
 %F{cyan}%#%f '
 
-alias man='LC_ALL=C LANG=C man'
 alias ll='ls -alh'
 alias l.='ls -d .[^.]*'
 

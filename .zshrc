@@ -15,24 +15,26 @@ export HISTSIZE=500
 export SAVEHIST=$HISTSIZE
 export PAGER='less'
 
-# Some parts of this are specific to OS X, or specific to Linux
+# Shortcuts for ls
+alias ll='ls -alh'
+alias l.='ls -d .[^.]*'
+
+# This configuration file is shared between Linux and OS X machines. Only do this bit on OS X.
 if [[ `uname` == "Darwin" ]]; then
-	# Only do this part on OS X
-	
 	# Highlight the location in the prompt a particular colour depending on platform
 	host_colour=yellow
 	
-	# the 'cdf' command will cd to the current open Finder directory, needs OpenTerminal installed
+	# The 'cdf' command will cd to the current open Finder directory, needs OpenTerminal installed
 	cdf() { cd "`osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)'`" }
 
-	# set macvim as the editor
+	# Set textmate as the editor
 	export EDITOR='/usr/local/bin/mate -w'
-	#export EDITOR='mvim -f -c "au VimLeave * !open -a Terminal"'
 
-	# set ls for colorized; label dirs, exes, etc.; one entry per line
+	# Set ls for colorized; label dirs, exes, etc.; one entry per line
 	alias ls='pwd;ls -F1G '
+	
+# Only do this part on Linux.
 else
-	# Only do this part elsewhere (Linux, assumed)
 	
 	# Show running processes on a different tty, that aren't sh or the current shell
 	ps -Nft - -t `tty` -C `basename $SHELL` -C sh 2> /dev/null | grep "^$(whoami)"
@@ -40,10 +42,11 @@ else
 	# Highlight the location in the prompt a particular colour depending on platform
 	host_colour=cyan
 
-	# set ls for colorized; label dirs, exes, etc.; one entry per line
+	# Set ls for colorized; label dirs, exes, etc.; one entry per line
 	alias ls='pwd;ls -F1 --color=auto '
 fi
 
+# Function that returns `pwd`, but paths relative to home dir are replaced with ~/path
 function pwd_with_home() {
 	pwd | sed `printf 's?%q?~?' $HOME` | sed 's/\\/\\\\/g'
 }
@@ -52,9 +55,7 @@ export PROMPT=$'
 %F{magenta}$(whoami)%f at %F{$host_colour}$(hostname)%f in %F{green}$(pwd_with_home)%f
 %F{cyan}%#%f '
 
-alias ll='ls -alh'
-alias l.='ls -d .[^.]*'
-
+# Autocomplete stuff
 expand-or-complete-with-dots() {
 	echo -n "\e[1;30m...\e[0m" # put the "waiting" dots
 	zle expand-or-complete   # do the completion

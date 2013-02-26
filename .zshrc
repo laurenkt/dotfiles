@@ -1,28 +1,7 @@
-setopt APPEND_HISTORY
-setopt AUTO_CD
-setopt AUTO_RESUME
-setopt AUTO_PUSHD
-setopt CDABLE_VARS
-setopt CORRECT
-setopt CORRECT_ALL
-setopt EXTENDED_HISTORY
-setopt EXTENDED_GLOB
-setopt HIST_IGNORE_DUPS
-setopt HIST_REDUCE_BLANKS
-setopt INC_APPEND_HISTORY
-setopt LONG_LIST_JOBS
-setopt MENU_COMPLETE
-setopt NOTIFY
-setopt PROMPT_SUBST
-setopt PUSHD_SILENT
-setopt RC_QUOTES
-setopt REC_EXACT
-setopt SHARE_HISTORY
-
-unsetopt AUTO_PARAM_SLASH
-unsetopt BEEP
-unsetopt BG_NICE
-unsetopt CLOBBER
+setopt APPEND_HISTORY AUTO_CD AUTO_RESUME AUTO_PUSHD CDABLE_VARS CORRECT CORRECT_ALL EXTENDED_HISTORY EXTENDED_GLOB \
+       HIST_IGNORE_DUPS HIST_REDUCE_BLANKS  INC_APPEND_HISTORY LONG_LIST_JOBS MENU_COMPLETE NOTIFY PROMPT_SUBST \
+       PUSHD_SILENT RC_QUOTES REC_EXACT SHARE_HISTORY
+unsetopt AUTO_PARAM_SLASH BEEP BG_NICE CLOBBER
 
 # Autoload zsh modules when they are referenced
 zmodload -a zsh/stat stat
@@ -72,7 +51,7 @@ else
 
 	# set ls for colorized; label dirs, exes, etc.; one entry per line
 	alias ls='pwd;ls -F1 --color=auto '
-fi 
+fi
 
 function pwd_with_home() {
 	pwd | sed `printf 's?%q?~?' $HOME` | sed 's/\\/\\\\/g'

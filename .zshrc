@@ -9,11 +9,11 @@ zmodload -a zsh/zpty zpty
 zmodload -a zsh/zprof zprof
 zmodload -ap zsh/mapfile mapfile
 
-export EDITOR="vim"
+export EDITOR=vim
 export HISTFILE=$HOME/.zhistory
 export HISTSIZE=500
 export SAVEHIST=$HISTSIZE
-export PAGER='less'
+export PAGER=less
 
 # Shortcuts for ls
 alias ll='ls -alh'

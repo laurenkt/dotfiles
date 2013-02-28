@@ -19,6 +19,19 @@ export PAGER=less
 alias ll='ls -alh'
 alias l.='ls -d .[^.]*'
 
+# Coloured Man Pages
+man() {
+	env \
+		LESS_TERMCAP_mb=$(printf "\e[1;31m") \
+		LESS_TERMCAP_md=$(printf "\e[1;35m") \
+		LESS_TERMCAP_me=$(printf "\e[1;34m") \
+		LESS_TERMCAP_se=$(printf "\e[1;33m") \
+		LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
+		LESS_TERMCAP_ue=$(printf "\e[1;30m") \
+		LESS_TERMCAP_us=$(printf "\e[1;32m") \
+			man "$@"
+}
+
 # This configuration file is shared between Linux and OS X machines. Only do this bit on OS X.
 if [[ `uname` == Darwin ]]; then
 	# Highlight the location in the prompt a particular colour depending on platform

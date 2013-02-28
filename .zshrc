@@ -21,15 +21,10 @@ alias l.='ls -d .[^.]*'
 
 # Coloured Man Pages
 man() {
-	env \
-		LESS_TERMCAP_mb=$(printf "\e[1;31m") \
-		LESS_TERMCAP_md=$(printf "\e[1;35m") \
-		LESS_TERMCAP_me=$(printf "\e[1;34m") \
-		LESS_TERMCAP_se=$(printf "\e[1;33m") \
-		LESS_TERMCAP_so=$(printf "\e[1;44;33m") \
-		LESS_TERMCAP_ue=$(printf "\e[1;30m") \
-		LESS_TERMCAP_us=$(printf "\e[1;32m") \
-			man "$@"
+	env LESS_TERMCAP_mb=$'\e[1;31m' LESS_TERMCAP_md=$'\e[1;35m' LESS_TERMCAP_me=$'\e[1;34m' \
+	    LESS_TERMCAP_se=$'\e[1;37m' LESS_TERMCAP_so=$'\e[1;44;33m' LESS_TERMCAP_ue=$'\e[1;30m' \
+	    LESS_TERMCAP_us=$'\e[1;32m' \
+	man "$@"
 }
 
 # This configuration file is shared between Linux and OS X machines. Only do this bit on OS X.
@@ -89,7 +84,6 @@ bindkey ' ' magic-space    # also do history expansion on space
 zstyle ':completion::complete:*' use-cache on
 zstyle ':completion::complete:*' cache-path ~/.zsh/cache/$HOST
 
-zstyle ':completion:*' list-colors ${(s.:.)LS_COLORS}
 zstyle ':completion:*' list-prompt '%SAt %p: Hit TAB for more, or the character to insert%s'
 zstyle ':completion:*' menu select=1 _complete _ignored _approximate
 zstyle -e ':completion:*:approximate:*' max-errors \

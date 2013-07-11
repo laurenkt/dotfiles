@@ -62,8 +62,8 @@ pwd_with_home() {
 }
 
 export PROMPT=$'
-%K{black} %F{magenta}$USER%f@%F{$host_colour}$(hostname)%f %k%K{green} %F{black}$(pwd_with_home) %k%f
-%F{black}%#%f '
+%K{black} %F{magenta}$USER%f %k %F{$host_colour}$(hostname)%f %K{green} %F{black}$(pwd_with_home) %k%f
+%F{cyan}%#%f '
 
 # Autocomplete stuff
 expand-or-complete-with-dots() {

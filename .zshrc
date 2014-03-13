@@ -41,6 +41,9 @@ if [[ `uname` == Darwin ]]; then
 	# Set ls for colorized; label dirs, exes, etc.; one entry per line
 	alias ls='pwd;ls -F1G '
 	
+	# Homebrew set-up
+	export PATH=/usr/local/sbin:$PATH
+	
 # Only do this part on Linux.
 else
 	# PATH for course tools
@@ -55,6 +58,9 @@ else
 	# Set ls for colorized; label dirs, exes, etc.; one entry per line
 	alias ls='pwd;ls -F1 --color=auto '
 fi
+
+# rbenv set-up
+if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
 
 # Function that returns `pwd`, but paths relative to home dir are replaced with ~/path
 pwd_with_home() {

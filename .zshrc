@@ -21,9 +21,10 @@ alias l.='ls -d .[^.]*'
 
 # Coloured Man Pages
 man() {
-	env LESS_TERMCAP_mb=$'\e[1;31m' LESS_TERMCAP_md=$'\e[1;35m' LESS_TERMCAP_me=$'\e[1;34m' \
-	    LESS_TERMCAP_se=$'\e[1;37m' LESS_TERMCAP_so=$'\e[1;44;33m' LESS_TERMCAP_ue=$'\e[1;30m' \
-	    LESS_TERMCAP_us=$'\e[1;32m' \
+	env LESS_TERMCAP_mb=$(printf "\e[1;31m") LESS_TERMCAP_md=$(printf "\e[1;31m") \
+		LESS_TERMCAP_me=$(printf "\e[0m") LESS_TERMCAP_se=$(printf "\e[0m") \
+		LESS_TERMCAP_so=$(printf "\e[1;44;33m") LESS_TERMCAP_ue=$(printf "\e[0m") \
+		LESS_TERMCAP_us=$(printf "\e[1;32m") \
 	man "$@"
 }
 
@@ -35,8 +36,8 @@ if [[ `uname` == Darwin ]]; then
 	# The 'cdf' command will cd to the current open Finder directory, needs OpenTerminal installed
 	cdf() { cd "`osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)'`" }
 
-	# Set textmate as the editor
-	export EDITOR='/usr/local/bin/mate -w'
+	# Set mvim as the editor
+	export EDITOR='mvim'
 
 	# Set ls for colorized; label dirs, exes, etc.; one entry per line
 	alias ls='pwd;ls -F1G '

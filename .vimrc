@@ -6,14 +6,6 @@ set backspace=indent,eol,start
 set lines=35
 set columns=120
 
-" Menus I like :-)
-" ----------------
-" This must happen before the syntax system is enabled
-aunmenu Help.
-aunmenu Window.
-let no_buffers_menu=1
-set mousemodel=popup
-
 " Show whitespace
 set listchars=eol:¬,tab:→ 
 set list
@@ -30,7 +22,6 @@ set viminfo+=!
 set cursorline
 set wildmenu
 set ruler
-set guioptions-=T
 set completeopt-=preview
 set gcr=a:blinkon0
 
@@ -41,7 +32,7 @@ set gcr=a:blinkon0
 syntax on
 if has("gui_running")
   colorscheme fruity
-  set guifont=Monaco:h12
+  set guifont=Inconsolata-g:h12
 else
   set nolist
   set nocursorline

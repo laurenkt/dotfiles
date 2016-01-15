@@ -31,7 +31,7 @@ man() {
 # This configuration file is shared between Linux and OS X machines. Only do this bit on OS X.
 if [[ `uname` == Darwin ]]; then
 	# Highlight the location in the prompt a particular colour depending on platform
-	host_colour=yellow
+	host_colour=magenta
 	
 	# The 'cdf' command will cd to the current open Finder directory, needs OpenTerminal installed
 	cdf() { cd "`osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)'`" }
@@ -69,7 +69,7 @@ pwd_with_home() {
 }
 
 export PROMPT=$'
-%K{black} %F{magenta}$USER%f %k %F{$host_colour}$(hostname)%f %K{green} %F{black}$(pwd_with_home) %k%f
+🔆 %F{white} $USER%f %F{$host_colour}$(hostname)%f %K{green} %F{black}$(pwd_with_home) %k%f
 %F{cyan}%#%f '
 
 # Autocomplete stuff

@@ -3,15 +3,28 @@
 set nocompatible
 set backspace=indent,eol,start
 
+" set the runtime path to include Vundle and initialize
+set rtp+=~/.vim/bundle/Vundle.vim
+call vundle#begin()
+" alternatively, pass a path where Vundle should install plugins
+"call vundle#begin('~/some/path/here')
+
+" let Vundle manage Vundle, required
+Plugin 'VundleVim/Vundle.vim'
+
+Plugin 'godlygeek/tabular'
+Plugin 'plasticboy/vim-markdown'
+
+
+Bundle 'bbchung/clighter'
+let g:clighter_libclang_file = '/Library/Developer/CommandLineTools/usr/lib/libclang.dylib' "`xcode-select -p`/usr/lib/libclang.dylib
+
 set lines=35
 set columns=120
 
 " Show whitespace
 set listchars=eol:¬,tab:→ 
 set list
-
-" Support for yankring
-set viminfo+=!
 
 " User Interface
 " --------------
@@ -46,36 +59,6 @@ autocmd BufEnter * :syntax sync fromstart
 set backupdir=~/.vim/sessions
 set dir=~/.vim/sessions
 
-" Some File Type Stuff
-" --------------------
-"  Enable filetype plugins and indention
-filetype on
-filetype plugin on
-
-" File Templates
-" --------------
-"  ^J jumps to the next marker
-function! LoadFileTemplate()
-  silent! 0r ~/.vim/templates/%:e.tmpl
-  syn match vimTemplateMarker "<+.\++>" containedin=ALL
-  hi vimTemplateMarker guifg=#67a42c guibg=#112300 gui=bold
-endfunction
-function! JumpToNextPlaceholder()
-  let old_query = getreg('/')
-  echo search("<+.\\++>")
-  exec "norm! c/+>/e\<CR>"
-  call setreg('/', old_query)
-endfunction
-autocmd BufNewFile * :call LoadFileTemplate()
-nnoremap <C-J> :call JumpToNextPlaceholder()<CR>a
-inoremap <C-J> <ESC>:call JumpToNextPlaceholder()<CR>a
-
-" Leader
-" ------
-" sets leader to ',' and localleader to "\"
-let mapleader=","
-let maplocalleader="\\"
-
 " Don't outdent hashes
 inoremap # #
 
@@ -96,40 +79,26 @@ set tabstop=4
 set shiftwidth=4
 set noexpandtab
 
-" Tab page settings
-" -----------------
-function! GuiTabLabel()
-  let label = ''
-  let buflist = tabpagebuflist(v:lnum)
-  if exists('t:title')
-    let label .= t:title . ' '
-  endif
-  let label .= '[' . bufname(buflist[tabpagewinnr(v:lnum) - 1]) . ']'
-  for bufnr in buflist
-    if getbufvar(bufnr, '&modified')
-      let label .= '+'
-      break
-    endif
-  endfor
-  return label
-endfunction
-set guitablabel=%{GuiTabLabel()}
-
 " utf-8 default encoding
 " ----------------------
 set enc=utf-8
-
-" Javascript
-" ----------
-let javascript_enable_domhtmlcss=1
 
 " Better Search
 " -------------
 set hlsearch
 set incsearch
 
-" Minibuffer
-" ----------
-"  one click is enough and fix some funny bugs
-let g:miniBufExplUseSingleClick = 1
-let g:miniBufExplMapCTabSwitchBufs = 1
+" All of your Plugins must be added before the following line
+call vundle#end()            " required
+filetype plugin indent on    " required
+" To ignore plugin indent changes, instead use:
+"filetype plugin on
+"
+" Brief help
+" :PluginList       - lists configured plugins
+" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
+" :PluginSearch foo - searches for foo; append `!` to refresh local cache
+" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
+"
+" see :h vundle for more details or wiki for FAQ
+" Put your non-Plugin stuff after this line

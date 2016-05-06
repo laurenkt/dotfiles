@@ -36,8 +36,8 @@ if [[ `uname` == Darwin ]]; then
 	# The 'cdf' command will cd to the current open Finder directory, needs OpenTerminal installed
 	cdf() { cd "`osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)'`" }
 
-	# Set mvim as the editor
-	export EDITOR='mvim'
+	# Set VimR as the editor
+	export EDITOR='vimr'
 
 	# Set ls for colorized; label dirs, exes, etc.; one entry per line
 	alias ls='pwd;ls -F1G '

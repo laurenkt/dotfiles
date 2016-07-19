@@ -19,6 +19,9 @@ export PAGER=less
 alias ll='ls -alh'
 alias l.='ls -d .[^.]*'
 
+# Neovim
+alias vim=nvim
+
 # Coloured Man Pages
 man() {
 	env LESS_TERMCAP_mb=$(printf "\e[1;31m") LESS_TERMCAP_md=$(printf "\e[1;31m") \

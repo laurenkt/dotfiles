@@ -3,3 +3,5 @@
 	name = Lauren
 [alias]
 	up = "!git remote update -p; git merge --ff-only @{u}"
+[push]
+	default = simple

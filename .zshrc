@@ -40,7 +40,7 @@ if [[ `uname` == Darwin ]]; then
 	cdf() { cd "`osascript -e 'tell app "Finder" to POSIX path of (insertion location as alias)'`" }
 
 	# Set Neovim.app as the editor
-	export EDITOR='gnvim'
+	#export EDITOR='gnvim'
 
 	# Set ls for colorized; label dirs, exes, etc.; one entry per line
 	alias ls='pwd;ls -F1G '

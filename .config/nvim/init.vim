@@ -91,7 +91,9 @@ let g:ctrlp_prompt_mappings = {
 			\ }
 
 " Airline
-let g:airline_powerline_fonts=1
+let g:airline_powerline_fonts=0
+let g:airline_left_sep=''
+let g:airline_right_sep=''
 " We don't need the default status indicator because we are using airline
 set noshowmode
 

@@ -5,3 +5,5 @@
 	up = "!git remote update -p; git merge --ff-only @{u}"
 [push]
 	default = simple
+[core]
+	excludesfile = /Users/lauren/.config/git/.gitignore

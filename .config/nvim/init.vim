@@ -7,7 +7,7 @@ call plug#begin()
 	Plug 'tpope/vim-sensible'
 	" Colorscheme
 	Plug 'Comaleaf/vim-monokai'
-	Plug 'justinmk/vim-sneak' " Thing to jump around with s<2chars>
+	" Plug 'justinmk/vim-sneak' " Thing to jump around with s<2chars>
 	" Airline (lightweight powerline)
 	Plug 'vim-airline/vim-airline'
 	" Handlebars support
@@ -15,7 +15,7 @@ call plug#begin()
 	" Ctrl-P fuzzy file matcher
 	Plug 'ctrlpvim/ctrlp.vim'
 	" Git
-	Plug 'tpope/vim-fugitive'
+	" Plug 'tpope/vim-fugitive'
 	" Syntax highlighting
 	Plug 'pangloss/vim-javascript'   " Better JS
 	Plug 'mxw/vim-jsx'               " JSX extensions for React
@@ -23,18 +23,19 @@ call plug#begin()
 	Plug 'othree/html5.vim'          " HTML 5
 	Plug 'hail2u/vim-css3-syntax'    " CSS3
 	Plug 'cakebaker/scss-syntax.vim' " SCSS
+	Plug 'jwalton512/vim-blade'      " PHP Blade templates
 	" Flow
-	Plug 'flowtype/vim-flow'
+	" Plug 'flowtype/vim-flow'
 	" Change brackets and quotes
 	Plug 'tpope/vim-surround'
 	" Make vim-surround repeatable with .
 	Plug 'tpope/vim-repeat'
 	" Show git diff stuff in the gutter
-	Plug 'mhinz/vim-signify'
+	" Plug 'mhinz/vim-signify'
 	" Dash integration
 	Plug 'rizzatti/dash.vim'
 	" Syntax checking integrations
-	Plug 'neomake/neomake'
+	 Plug 'neomake/neomake'
 	" Aligning text on seperators
 	" Use :Tab /regex to align to the regex
 	Plug 'godlygeek/tabular'
@@ -42,6 +43,8 @@ call plug#begin()
 	Plug 'Raimondi/delimitMate'
 	" Code completion
 	Plug 'Valloric/YouCompleteMe'
+	" Project specific .vimrc
+	Plug 'MarcWeber/vim-addon-local-vimrc'
 call plug#end()
 
 " Mouse please
@@ -67,7 +70,7 @@ set listchars=trail:◊,eol:¬,tab:→ 
 set list " Visible whitespace
 
 " Highlight current line
-set cursorline
+ set cursorline
 
 " Show line numbers
 set number
@@ -90,7 +93,7 @@ map <c-e> :Lexplore<cr>    " Invoke with Ctrl-E
 
 " Hide things in netrw and ctrl-P
 " OS junk, intermediate caches, source maps..
-set wildignore+=*/.git/,.DS_Store,*.map,*/.sass-cache/*,*/node_modules/*,*/.nyc_output/*,*/.Trash/*
+set wildignore+=*/.git/,.DS_Store,*.map,*/.sass-cache/*,*/node_modules/*,*/.nyc_output/*,*/.Trash/*,*/build/*,*/vendor/*
 let g:netrw_list_hide='\.git/$,\.DS_Store$,.*\.map$,\.sass-cache/$,node_modules/$'
 
 " Ctrl-P settings

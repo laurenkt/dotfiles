@@ -63,5 +63,22 @@ if [[ `uname` == Darwin ]]; then
 else
 # Linux
 	# Show running processes on a different tty, that aren't sh or the current shell
+	# This is useful when you log into a server and have forgotten you have bg tasks
 	ps -Nft - -t `tty` -C `basename $SHELL` -C sh 2> /dev/null | grep "^$USER"
+
+	# Set ls for colorized; label dirs, exes, etc.; one entry per line
+	alias ls='pwd;ls -F1 --color=auto '
 fi
+
+# Find partial history matches with up and down
+bindkey '^[[A' history-substring-search-up
+bindkey '^[[B' history-substring-search-down
+
+# Enable menu selection on tab completion
+zstyle ':completion:*' menu select=1 _complete _approximate
+
+# Colours in tab completion menu
+zstyle ':completion:*' list-colors "${(@s.:.)LS_COLORS}"
+
+# Need to enable extended engine for completion menu
+autoload -Uz compinit && compinit

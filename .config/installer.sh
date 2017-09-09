@@ -29,7 +29,7 @@ else
 fi
 
 if command -v chsh >/dev/null 2>&1; then
-	chsh -s $(which zsh)
+	chsh -s $(command -v zsh)
 fi
 
 zsh

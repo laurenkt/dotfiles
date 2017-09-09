@@ -1,26 +1,25 @@
-install-antibody () {
-	# Download antibody, remove the installation alias,
-	# and reload zsh conf
-	if read -q "REPLY?Install antibody from github? y/n\n"; then
-		echo "Installing..."
-		unalias antibody && \
-			(curl -sL https://git.io/antibody | bash -s) && \
-			echo "Reloading $HOME/.zshrc" && \
-			source "$HOME/.zshrc"
-	fi
-}
+# zplug
+source "$HOME/.config/zplug/init.zsh"
 
-# Only do this if antibody is installed
-if command -v antibody >/dev/null 2>&1; then
-    # Initialize getantibody/antibody
-    source <(antibody init)
-    # Load plugins
-    antibody bundle <"$HOME/.config/antibody/plugins.txt" > "$HOME/.config/zsh/plugins.sh"
-    source "$HOME/.config/zsh/plugins.sh"
-else
-	# Make it easy to install antibody
-	alias antibody=install-antibody
+zplug "mafredri/zsh-async"
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-autosuggestions"
+zplug "sindresorhus/pure"
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-history-substring-search"
+zplug "laurenkt/zsh-vimto"
+zplug "TBSliver/zsh-plugin-colored-man"
+
+# Install plugins if there are plugins that have not been installed
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
 fi
+
+# Then, source plugins and add commands to $PATH
+zplug load
 
 setopt AUTO_CD            # `cd` optional for dirs where no command conflicts
 setopt AUTO_PUSHD         # `cd` pushes dir onto the stack

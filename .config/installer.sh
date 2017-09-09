@@ -45,10 +45,12 @@ fi
 
 if [[ "$SHELL" != *zsh ]]; then
 	echo "👌 You're all set!"
+	source "$HOME/.zshrc"
 else
 	echo 'zsh is installed but you should still change your default shell to zsh'
 	if command -v chsh >/dev/null 2>&1; then
 		echo '> chsh -s $(command -v zsh)'
 	fi
-	zsh; exit;
-exit
+	zsh
+	exit
+fi

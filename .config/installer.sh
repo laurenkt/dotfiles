@@ -19,7 +19,12 @@ if [ $? = 0 ]; then
 	echo "Checked out config";
 else
 	echo "Backing up pre-existing dot files...";
-	git. checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mv {} .config/backup/{}
+	if [ ! -d .config/backup ]; then mkdir .config/backup; fi
+	mkdir_mv () {
+		mkdir --parents `dirname $2`
+		mv $1 $2
+	}
+	git. checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mkdir_mv {} .config/backup/{}
 	git. checkout
 fi
 

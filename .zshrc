@@ -50,4 +50,3 @@ else
 	# Show running processes on a different tty, that aren't sh or the current shell
 	ps -Nft - -t `tty` -C `basename $SHELL` -C sh 2> /dev/null | grep "^$USER"
 fi
-

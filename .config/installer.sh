@@ -3,7 +3,7 @@
 # Set-up the bare repo
 git clone --bare https://github.com/laurenkt/dotfiles.git $HOME/.dotfiles.git
 function git. {
-   /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME $@
+   /usr/bin/git --git-dir=$HOME/.dotfiles.git/ --work-tree=$HOME $@
 }
 
 # Checkout files

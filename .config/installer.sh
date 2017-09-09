@@ -19,9 +19,16 @@ if [ $? = 0 ]; then
 	echo "Checked out config";
 else
 	echo "Backing up pre-existing dot files...";
+	# Complicated one. Find all the lines in git checkout that failed, 
+	# xargs them into sh so that we can use a compound statement which:
+	# - uses mkdir to create the dir structure to mv to
+	# - mv the files into that dir
 	git. checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | \
 		xargs -I{} sh -c 'mkdir --parents `dirname ./config/backup/{}`; mv {} ./config/backup/{};'
-	git. checkout
+	# Now trying again should avoid errors
+	git. checkout || (echo "⚠️  Could not resolve git conflicts," \
+		"please resolve them manually and try again" && \
+		exit)
 fi
 
 # This must go after so config exists

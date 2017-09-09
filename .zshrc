@@ -1,7 +1,7 @@
 install-antibody () {
 	# Download antibody, remove the installation alias,
 	# and reload zsh conf
-	if read -q "REPLY?Install antibody from github? y/n"; then
+	if read -q "REPLY?Install antibody from github? y/n\n"; then
 		echo "Installing..."
 		unalias antibody && \
 			(curl -sL https://git.io/antibody | bash -s) && \
@@ -70,9 +70,12 @@ else
 	alias ls='pwd;ls -F1 --color=auto '
 fi
 
-# Find partial history matches with up and down
-bindkey '^[[A' history-substring-search-up
-bindkey '^[[B' history-substring-search-down
+# Only do this if the module is loaded
+if zle -l history-substring-search-up; then
+	# Find partial history matches with up and down
+	bindkey '^[[A' history-substring-search-up
+	bindkey '^[[B' history-substring-search-down
+fi
 
 # Enable menu selection on tab completion
 zstyle ':completion:*' menu select=1 _complete _approximate

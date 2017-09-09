@@ -19,7 +19,7 @@ if command -v antibody >/dev/null 2>&1; then
     source "$HOME/.config/zsh/plugins.sh"
 else
 	# Make it easy to install antibody
-	alias antibody install-antibody
+	alias antibody=install-antibody
 fi
 
 setopt AUTO_CD            # `cd` optional for dirs where no command conflicts

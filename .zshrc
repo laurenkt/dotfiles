@@ -1,3 +1,15 @@
+function install-antibody {
+	# Download antibody, remove the installation alias,
+	# and reload zsh conf
+	if read -q "REPLY?Install antibody from github? y/n"; then
+		echo "Installing..."
+		(curl -sL https://git.io/antibody | bash -s) && \
+			unalias antibody && \
+			echo "Reloading $HOME/.zshrc" && \
+			source "$HOME/.zshrc"
+	fi
+}
+
 # Only do this if antibody is installed
 if which antibody > /dev/null; then
     # Initialize getantibody/antibody
@@ -5,6 +17,9 @@ if which antibody > /dev/null; then
     # Load plugins
     antibody bundle <"$HOME/.config/antibody/plugins.txt" > "$HOME/.config/zsh/plugins.sh"
     source "$HOME/.config/zsh/plugins.sh"
+else
+	# Make it easy to install antibody
+	alias antibody install-antibody
 fi
 
 setopt AUTO_CD            # `cd` optional for dirs where no command conflicts

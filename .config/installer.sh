@@ -24,6 +24,7 @@ else
 		mkdir --parents `dirname $2`
 		mv $1 $2
 	}
+	export -f mkdir_mv
 	git. checkout 2>&1 | egrep "\s+\." | awk {'print $1'} | xargs -I{} mkdir_mv {} .config/backup/{}
 	git. checkout
 fi

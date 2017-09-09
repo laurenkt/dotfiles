@@ -50,7 +50,7 @@ else
 	fi
 fi
 
-if [[ "$SHELL" != *zsh ]]; then
+if [[ "$SHELL" == *zsh ]]; then
 	echo "👌 You're all set!"
 	source "$HOME/.zshrc"
 else

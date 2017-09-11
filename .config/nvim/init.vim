@@ -59,6 +59,9 @@ colorscheme monokai
 " Make Vim use bash (for compatibility with some plugins)
 set shell=/bin/bash
 
+" Reload files when they change
+set autoread
+
 " Tabs preferences..
 " This would enable Ctrl+[/] to switch tabs but since I have switched to using
 " Neovim.app there's no need for this

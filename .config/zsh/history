@@ -1,0 +1,32 @@
+sudo apt-get install transmission-daemon
+mount
+mount /dev/sda3 /media/MB
+sudo mount /dev/sda3 /media/MB
+cd media
+cd /media
+ls
+mkdir MB
+sudo mkdir MB
+sudo mount /dev/sda3 /media/MB
+cd /media/MB
+ls
+ll
+sudo chmod +r MB
+ls
+ll
+cd MB
+sudo chown -r pi MB
+sudo chown -R pi MB
+ll
+cd MB
+ls
+ll
+cd ..
+sudo umount /media/MB
+sudo mount /dev/sda2 /media/MB
+cd /media/MB
+ls
+mkdir ~/.config/zsh
+touch ~/.config/zsh/history
+git. status
+git. add ~/.config/zsh/history
